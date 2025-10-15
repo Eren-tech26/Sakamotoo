@@ -42,7 +42,7 @@ HEROKU_API_KEY = "HRKU-3a48d735-445f-49c4-a6cf-fea438f945ef"
 
 UPSTREAM_REPO = "https://github.com/Eren-tech26/sakamoto.git"
 
-UPSTREAM_BRANCH = "master"
+UPSTREAM_BRANCH = "main"
 
 GIT_TOKEN = "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"
 
@@ -117,4 +117,5 @@ if SUPPORT_CHAT:
         raise SystemExit(
             "[ERROR] - Your SUPPORT_CHAT url is wrong. Please ensure that it starts with https://"
         )
+
 
