@@ -108,6 +108,7 @@ confirmer = 7774827065  # You as sudo user
 DURATION_LIMIT_MIN = 10  # Max song length in mins
 SUPPORT_CHANNEL = None  # No channel? Keep None
 SUPPORT_CHAT = "https://t.me/igrischatsupport"  # Your support group link
+LOG_GROUP_ID = -1002970645365
 
 def time_to_seconds(time):
     stringt = str(time)
@@ -126,6 +127,7 @@ if SUPPORT_CHAT:
         raise SystemExit(
             "[ERROR] - Your SUPPORT_CHAT url is wrong. Please ensure that it starts with https://"
         )
+
 
 
 
