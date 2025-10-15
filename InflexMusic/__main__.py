@@ -1,5 +1,7 @@
 import asyncio
 import importlib
+import sys
+import signal
 
 from pyrogram import idle
 from pytgcalls.exceptions import NoActiveGroupCall
@@ -13,6 +15,28 @@ from InflexMusic.utils.database import get_banned_users, get_gbanned
 from config import BANNED_USERS
 
 
+def shutdown():
+    loop = asyncio.get_event_loop()
+    tasks = [task for task in asyncio.all_tasks(loop) if task is not asyncio.current_task()]
+    for task in tasks:
+        task.cancel()
+    loop.run_until_complete(loop.shutdown_asyncgens())
+    loop.close()
+
+
+def signal_handler(sig, frame):
+    LOGGER("InflexMusic").info("Received signal, stopping...")
+    asyncio.create_task(app.stop())
+    asyncio.create_task(userbot.stop())
+    asyncio.create_task(Inflex.stop())
+    shutdown()
+    sys.exit(0)
+
+
+signal.signal(signal.SIGINT, signal_handler)
+signal.signal(signal.SIGTERM, signal_handler)
+
+
 async def init():
     if (
         not config.STRING1
@@ -22,7 +46,7 @@ async def init():
         and not config.STRING5
     ):
         LOGGER(__name__).error("Assistant client variables not defined, exiting...")
-        exit()
+        sys.exit(1)
     await sudo()
     try:
         users = await get_gbanned()
@@ -45,18 +69,23 @@ async def init():
         LOGGER("InflexMusic").error(
             "Please turn on the videochat of your log group\channel.\n\nStopping Bot..."
         )
-        exit()
+        sys.exit(1)
     except:
         pass
     await Inflex.decorators()
     LOGGER("InflexMusic").info(
         "Inflex Music Bot Started Successfully"
     )
-    await idle()
-    await app.stop()
-    await userbot.stop()
-    LOGGER("InflexMusic").info("Stopping Inflex Music Bot...")
+    try:
+        await idle()
+    except KeyboardInterrupt:
+        LOGGER("InflexMusic").info("KeyboardInterrupt received, stopping...")
+    finally:
+        await app.stop()
+        await userbot.stop()
+        await Inflex.stop()
+        LOGGER("InflexMusic").info("Stopping Inflex Music Bot...")
 
 
 if __name__ == "__main__":
-    asyncio.get_event_loop().run_until_complete(init())
+    asyncio.run(init())
