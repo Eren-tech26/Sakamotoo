@@ -109,6 +109,7 @@ DURATION_LIMIT_MIN = 10  # Max song length in mins
 SUPPORT_CHANNEL = None  # No channel? Keep None
 SUPPORT_CHAT = "https://t.me/igrischatsupport"  # Your support group link
 LOG_GROUP_ID = -1002970645365
+PING_IMG_URL = "https://i.ibb.co/PsxMmzrt/photo-2025-10-15-09-42-56-7561381733828919316.jpg"
 
 def time_to_seconds(time):
     stringt = str(time)
@@ -127,6 +128,7 @@ if SUPPORT_CHAT:
         raise SystemExit(
             "[ERROR] - Your SUPPORT_CHAT url is wrong. Please ensure that it starts with https://"
         )
+
 
 
 
