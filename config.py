@@ -99,6 +99,15 @@ SPOTIFY_ARTIST_IMG_URL = "https://i.ibb.co/kgvX7FPC/photo-2025-10-13-10-24-24-75
 SPOTIFY_ALBUM_IMG_URL = "https://i.ibb.co/kgvX7FPC/photo-2025-10-13-10-24-24-7560650262243704836.jpg"
 SPOTIFY_PLAYLIST_IMG_URL = "https://i.ibb.co/kgvX7FPC/photo-2025-10-13-10-24-24-7560650262243704836.jpg"
 
+# Admin and Support Configs
+SUPPORT_GROUP = -1002470086715  # Your real support group ID
+adminlist = [7774827065]  # Your user ID as admin
+confirmer = 7774827065  # You as sudo user
+
+# From before (keep/add if missing)
+DURATION_LIMIT_MIN = 10  # Max song length in mins
+SUPPORT_CHANNEL = None  # No channel? Keep None
+SUPPORT_CHAT = "https://t.me/igrischatsupport"  # Your support group link
 
 def time_to_seconds(time):
     stringt = str(time)
@@ -117,5 +126,6 @@ if SUPPORT_CHAT:
         raise SystemExit(
             "[ERROR] - Your SUPPORT_CHAT url is wrong. Please ensure that it starts with https://"
         )
+
 
 
